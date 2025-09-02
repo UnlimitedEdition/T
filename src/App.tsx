@@ -25,6 +25,7 @@ import AdminWorks from "./pages/admin/AdminWorks";
 import AdminReviews from "./pages/admin/AdminReviews";
 import AdminFAQ from "./pages/admin/AdminFAQ";
 import AdminPricing from "./pages/admin/AdminPricing";
+import SkrollToTop from "@/components/ScrollToTop";
 
 // Components
 import AdminLayout from "@/components/AdminLayout";
@@ -42,6 +43,7 @@ const App = () => (
           v7_relativeSplatPath: true,
         }}
       >
+        <SkrollToTop />
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Index />} />
