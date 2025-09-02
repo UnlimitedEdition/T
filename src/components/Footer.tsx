@@ -132,6 +132,11 @@ const Footer = () => {
                   Recenzije
                 </Link>
               </li>
+              <li>
+                <Link to="/faq" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                 Često postavljana pitanja
+                </Link>
+              </li>
             </ul>
           </div>
 
