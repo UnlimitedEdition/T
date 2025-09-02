@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 // Pages
 import Index from "./pages/Index";
@@ -19,12 +19,15 @@ import NotFound from "./pages/NotFound";
 import Configurator from "./pages/Configurator";
 import Recenzija from "./pages/Recenzija";
 import Admin from "./pages/Admin";
-import AdminInquiries from "./pages/admin/AdminInquiries.tsx";
-import AdminMaterials from "./pages/admin/AdminMaterials.tsx";
-import AdminWorks from "./pages/admin/AdminWorks.tsx";
-import AdminReviews from "./pages/admin/AdminReviews.tsx";
-import AdminFAQ from "./pages/admin/AdminFAQ.tsx";
-import AdminPricing from "./pages/admin/AdminPricing.tsx";
+import AdminInquiries from "./pages/admin/AdminInquiries";
+import AdminMaterials from "./pages/admin/AdminMaterials";
+import AdminWorks from "./pages/admin/AdminWorks";
+import AdminReviews from "./pages/admin/AdminReviews";
+import AdminFAQ from "./pages/admin/AdminFAQ";
+import AdminPricing from "./pages/admin/AdminPricing";
+
+// Components
+import AdminLayout from "@/components/AdminLayout";
 
 const queryClient = new QueryClient();
 
@@ -33,13 +36,14 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter 
+      <BrowserRouter
         future={{
           v7_startTransition: true,
           v7_relativeSplatPath: true,
         }}
       >
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={<Index />} />
           <Route path="/kontakt" element={<Kontakt />} />
           <Route path="/materijali" element={<Materijali />} />
@@ -50,14 +54,18 @@ const App = () => (
           <Route path="/uslovi-koriscenja" element={<UsloviKoriscenja />} />
           <Route path="/cookies" element={<Cookies />} />
           <Route path="/konfigurator" element={<Configurator />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/inquiries" element={<AdminInquiries />} />
-          <Route path="/admin/materials" element={<AdminMaterials />} />
-          <Route path="/admin/works" element={<AdminWorks />} />
-          <Route path="/admin/reviews" element={<AdminReviews />} />
-          <Route path="/admin/faq" element={<AdminFAQ />} />
-          <Route path="/admin/pricing" element={<AdminPricing />} />
           <Route path="/recenzija" element={<Recenzija />} />
+
+          {/* Admin Routes - Protected */}
+          <Route path="/admin" element={<AdminLayout><Admin /></AdminLayout>} />
+          <Route path="/admin/inquiries" element={<AdminLayout><AdminInquiries /></AdminLayout>} />
+          <Route path="/admin/materials" element={<AdminLayout><AdminMaterials /></AdminLayout>} />
+          <Route path="/admin/works" element={<AdminLayout><AdminWorks /></AdminLayout>} />
+          <Route path="/admin/reviews" element={<AdminLayout><AdminReviews /></AdminLayout>} />
+          <Route path="/admin/faq" element={<AdminLayout><AdminFAQ /></AdminLayout>} />
+          <Route path="/admin/pricing" element={<AdminLayout><AdminPricing /></AdminLayout>} />
+
+          {/* 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
