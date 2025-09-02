@@ -1,6 +1,7 @@
 // src/pages/Admin.tsx
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AdminAuth from "@/components/AdminAuth";
